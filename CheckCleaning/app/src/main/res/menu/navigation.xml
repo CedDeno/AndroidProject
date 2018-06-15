@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/bottom_navigation_home_text" />
+
+    <item
+        android:id="@+id/navigation_todo"
+        android:icon="@mipmap/todo_icon"
+        android:title="@string/bottom_navigation_todo_text" />
+
+    <item
+        android:id="@+id/navigation_control"
+        android:icon="@mipmap/control_icon"
+        android:title="@string/bottom_navigation_control_text" />
+
+    <item
+        android:id="@+id/navigation_report"
+        android:icon="@mipmap/report_icon"
+        android:title="@string/bottom_navigation_report_text" />
+
+    <item
+        android:id="@+id/navigation_team"
+        android:icon="@mipmap/team_icon"
+        android:title="@string/bottom_navigation_team_text" />
+</menu>

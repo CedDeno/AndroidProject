@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "543210570877",
+    "firebase_url": "https://checkcleaning-android.firebaseio.com",
+    "project_id": "checkcleaning-android",
+    "storage_bucket": "checkcleaning-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543210570877:android:177cb228629a7d51",
+        "android_client_info": {
+          "package_name": "be.technifutur.checkcleaning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543210570877-p52qc8snj9aq78bd7to5qgbknsg2ia65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "be.technifutur.checkcleaning",
+            "certificate_hash": "d05bb1b6ebfafbb1734baccfb8fcaf9ef006914a"
+          }
+        },
+        {
+          "client_id": "543210570877-3hl7m3keuksp94e7i43kg9fpkvf43h1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAKs0lODRzOoVjbJmUd92gdfPDAYEGEEM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543210570877-3hl7m3keuksp94e7i43kg9fpkvf43h1h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

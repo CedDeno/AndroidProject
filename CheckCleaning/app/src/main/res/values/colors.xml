@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1d566e</color>
+    <color name="colorPrimaryDark">#163a5f</color>
+    <color name="colorAccent">#45eba5</color>
+    <color name="colorAccentLight">#2a45eba5</color>
+    <color name="buttonColor">#21aba5</color>
+    <color name="selectedItemColor">#cfcfcf</color>
+    <color name="colorGrey">#b3b3b3</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteLight">#c0ffffff</color>
+    <color name="spinnerColor">#c0d4f7</color>
+    <color name="redErrorColor">#ca5258</color>
+    <color name="greenOkColor">#41a241</color>
+</resources>

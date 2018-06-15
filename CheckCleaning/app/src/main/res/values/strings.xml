@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">CheckCleaning</string>
+    <string name="connection_button_text">Connexion</string>
+    <string name="login_textView_hint">Login</string>
+    <string name="password_textView_hint">Mot de passe</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="building_choice_button_text">Choisir</string>
+    <string name="sign_up_button_text">Inscription</string>
+    <string name="last_name_hint_text">Nom</string>
+    <string name="first_name_hint_text">Prénom</string>
+    <string name="email_hint_text">Email</string>
+    <string name="mobile_hint_text">N° mobile</string>
+    <string name="password_hint_text">Mot de passe</string>
+    <string name="confirmPassword_hint_text">Confirmer mot de passe</string>
+    <string name="validate_button_text">Confirmer</string>
+    <string name="regex_email_text">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
+    <string name="title_activity_bottom_bar">BottomBarActivity</string>
+    <string name="email_already_exist_toast">Cette adresse email existe déjà !</string>
+    <string name="bottom_navigation_home_text">Accueil</string>
+    <string name="bottom_navigation_control_text">Contrôle</string>
+    <string name="bottom_navigation_report_text">Rapport</string>
+    <string name="bottom_navigation_team_text">Equipe</string>
+    <string name="bottom_navigation_todo_text">Notes</string>
+    <string name="createBuilding_name_hint">Nom du bâtiment</string>
+    <string name="createBuilding_address_hint">Adresse</string>
+    <string name="createBuilding_button_text">Valider</string>
+    <string name="title_creationBuilding">Création d\'un chantier</string>
+</resources>
