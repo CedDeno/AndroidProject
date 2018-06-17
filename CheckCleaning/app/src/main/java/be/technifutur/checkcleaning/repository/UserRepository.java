@@ -35,6 +35,10 @@ public class UserRepository{
         this.mDatabase = FirebaseFirestore.getInstance();
     }
 
+    public boolean isAuthentificate(){
+        return mAuth.getUid() != null;
+    }
+
     public void signInByEmailAndPassword(String email, String password, final OnLoginFinishedListener listener, Activity view) {
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -52,9 +56,9 @@ public class UserRepository{
                 });
     }
 
-    public void getById(String id, final OnGetUserFinishedListener listener) {
+    public void getById(final OnGetUserFinishedListener listener) {
 
-        DocumentReference docRef = mDatabase.collection("user").document(id);
+        DocumentReference docRef = mDatabase.collection("user").document(mAuth.getUid());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 

@@ -79,6 +79,6 @@ public class TaskData implements Parcelable, Comparable<TaskData> {
 
     @Override
     public String toString() {
-        return building_name;
+        return building_name + " : " + content;
     }
 }

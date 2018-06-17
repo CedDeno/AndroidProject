@@ -3,6 +3,7 @@ package be.technifutur.checkcleaning.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import be.technifutur.checkcleaning.R;
@@ -46,6 +47,7 @@ public class CreateBuildingActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Champs incorrects.", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     /**

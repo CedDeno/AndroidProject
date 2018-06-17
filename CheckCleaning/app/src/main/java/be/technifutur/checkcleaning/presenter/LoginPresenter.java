@@ -30,6 +30,14 @@ public class LoginPresenter implements OnLoginFinishedListener, OnGetUserFinishe
         }
     }
 
+    public void userExist(){
+
+        if(userRepo.isAuthentificate()){
+            mView.startAnimationActivity();
+            userRepo.getById(this);
+        }
+    }
+
     @Override
     public void onUsernameError() {
 
@@ -48,7 +56,7 @@ public class LoginPresenter implements OnLoginFinishedListener, OnGetUserFinishe
     public void onLoginSuccess() {
 
         mView.startAnimationActivity();
-        userRepo.getById(FirebaseAuth.getInstance().getCurrentUser().getUid(), this);
+        userRepo.getById(this);
     }
 
     @Override

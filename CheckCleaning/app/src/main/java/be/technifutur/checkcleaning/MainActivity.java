@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         loginPresenter = new LoginPresenter(this);
+
+        loginPresenter.userExist();
     }
 
 

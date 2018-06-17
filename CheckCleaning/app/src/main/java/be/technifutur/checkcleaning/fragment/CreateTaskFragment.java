@@ -39,9 +39,11 @@ public class CreateTaskFragment extends Fragment {
     private User mUser;
     private Building mBuilding;
     private CreateTaskPresenter mPresenter;
+    private boolean isClickable;
 
     public CreateTaskFragment() {
 
+        isClickable = true;
     }
 
     public static CreateTaskFragment newInstance(TodoFragment fragmentParent, User user, Building building) {
@@ -69,7 +71,10 @@ public class CreateTaskFragment extends Fragment {
 
     @OnClick(R.id.createTask_button)
     public void onValidateTask() {
-        mPresenter.saveTask(createTaskEditText.getText().toString(), mBuilding.getName());
+        if (isClickable) {
+            mPresenter.saveTask(createTaskEditText.getText().toString(), mBuilding.getName());
+            isClickable = false;
+        }
     }
 
     @Override
@@ -80,6 +85,5 @@ public class CreateTaskFragment extends Fragment {
 
     public void updateRecyclerViewFromParent() {
         mFragment.reloadItemAdapter();
-
     }
 }

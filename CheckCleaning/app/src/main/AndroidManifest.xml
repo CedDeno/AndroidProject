@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustResize|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +22,10 @@
         <activity android:name=".activity.SignUpActivity" />
         <activity
             android:name=".activity.BottomBarActivity"
-            android:label="@string/title_activity_bottom_bar" />
+            android:label="@string/title_activity_bottom_bar"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".activity.BuildingChoiceActivity" />
-        <activity android:name=".activity.CreateBuildingActivity" />
+        <activity android:name=".activity.CreateBuildingActivity" android:windowSoftInputMode="adjustResize|adjustPan"/>
     </application>
 
 </manifest>
