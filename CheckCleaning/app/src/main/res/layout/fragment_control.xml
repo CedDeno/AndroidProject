@@ -1,14 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.ControlFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="CONTROL FRAGMENT" />
 
-</FrameLayout>
+    <be.technifutur.checkcleaning.Util.CustomProgress
+        android:id="@+id/custom_progress_cafetaria"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:onClick="onClickCustomProgress"
+        android:clickable="true"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
+
+    <be.technifutur.checkcleaning.Util.CustomProgress
+        android:id="@+id/custom_progress_meeting_room"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickCustomProgress"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_cafetaria"
+        android:focusable="true" />
+
+    <be.technifutur.checkcleaning.Util.CustomProgress
+        android:id="@+id/custom_progress_office"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickCustomProgress"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_meeting_room"
+        android:focusable="true" />
+
+    <be.technifutur.checkcleaning.Util.CustomProgress
+        android:id="@+id/custom_progress_open_space"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickCustomProgress"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_office"
+        android:focusable="true" />
+
+    <be.technifutur.checkcleaning.Util.CustomProgress
+        android:id="@+id/custom_progress_relaxation_area"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickCustomProgress"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_open_space"
+        android:focusable="true" />
+
+    <be.technifutur.checkcleaning.Util.CustomProgress
+        android:id="@+id/custom_progress_restaurant"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickCustomProgress"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_relaxation_area"
+        android:focusable="true" />
+
+    <be.technifutur.checkcleaning.Util.CustomProgress
+        android:id="@+id/custom_progress_wc"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickCustomProgress"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_restaurant"
+        android:focusable="true" />
+
+
+</android.support.constraint.ConstraintLayout>

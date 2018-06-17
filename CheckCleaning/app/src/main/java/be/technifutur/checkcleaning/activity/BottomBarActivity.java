@@ -20,6 +20,7 @@ import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.Util.CustomViewPager;
 import be.technifutur.checkcleaning.adapter.ViewPagerAdapter;
 import be.technifutur.checkcleaning.entity.Building;
+import be.technifutur.checkcleaning.entity.Control;
 import be.technifutur.checkcleaning.entity.TaskData;
 import be.technifutur.checkcleaning.entity.User;
 import be.technifutur.checkcleaning.fragment.ControlFragment;
@@ -52,6 +53,7 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
     public static String mBuildingName;
     private boolean fragmentIsOpen;
     private BottomBarPresenter mPresenter;
+    private List<Control> mControls;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -120,10 +122,11 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
         mUser = getIntent().getExtras().getParcelable("user");
         mBuilding = getIntent().getExtras().getParcelable("building");
         mBuildingName = mBuilding.getName();
-        mPresenter = new BottomBarPresenter(this, mBuilding.getUsers_id());
+        mPresenter = new BottomBarPresenter(this, mBuilding);
         Collections.sort(mUser.getTasks());
         viewPager.addOnPageChangeListener(this);
         mPresenter.loadTeam();
+        mPresenter.loadControls();
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
@@ -188,7 +191,7 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         homeFragment = new HomeFragment();
         rootTodoFragment = RootTodoFragment.newInstance(this, mUser, mBuilding);
-        controlFragment = new ControlFragment();
+        controlFragment = ControlFragment.newInstance(mBuilding, mControls);
         reportFragment = new ReportFragment();
         teamFragment = TeamFragment.newInstance(mUser, team);
         adapter.addFragment(homeFragment);
@@ -234,5 +237,10 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
 
     public void setViewPager(CustomViewPager viewPager) {
         this.viewPager = viewPager;
+    }
+
+    public void setControls(List<Control> controls) {
+
+        mControls = controls;
     }
 }
