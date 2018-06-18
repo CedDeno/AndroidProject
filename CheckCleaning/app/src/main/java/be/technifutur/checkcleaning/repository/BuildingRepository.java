@@ -70,22 +70,6 @@ public class BuildingRepository{
         });
     }
 
-    public void getBuildingIdByName(){
-
-        /*DocumentReference docRef = mDatabase.collection("building").document(id);
-
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    User user = task.getResult().toObject(User.class);
-                    listener.onGetUserSuccess(user);
-                }
-            }
-        })*/
-    }
-
     /**
      * Génère un document (avec un id) afin de l'assigner ensuite à l'objet Building
      * @return

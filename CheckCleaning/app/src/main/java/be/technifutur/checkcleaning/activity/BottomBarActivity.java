@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.Util.CustomViewPager;
@@ -53,7 +54,10 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
     public static String mBuildingName;
     private boolean fragmentIsOpen;
     private BottomBarPresenter mPresenter;
-    private List<Control> mControls;
+    private Map<String, List<Control>> mControls;
+    private List<User> mteam;
+    private boolean teamLoaded;
+    private boolean controlsLoaded;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -117,6 +121,8 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
 
         setTitle("Accueil");
 
+        teamLoaded = false;
+        controlsLoaded = false;
         wouldLikeDC = false;
         fragmentIsOpen = false;
         mUser = getIntent().getExtras().getParcelable("user");
@@ -187,13 +193,13 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
 
     }
 
-    public void setupViewPager(List<User> team) {
+    public void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         homeFragment = new HomeFragment();
         rootTodoFragment = RootTodoFragment.newInstance(this, mUser, mBuilding);
         controlFragment = ControlFragment.newInstance(mBuilding, mControls);
         reportFragment = new ReportFragment();
-        teamFragment = TeamFragment.newInstance(mUser, team);
+        teamFragment = TeamFragment.newInstance(mUser, mteam);
         adapter.addFragment(homeFragment);
         adapter.addFragment(rootTodoFragment);
         adapter.addFragment(controlFragment);
@@ -228,7 +234,12 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
     }
 
     public void createViewPager(List<User> team) {
-        setupViewPager(team);
+
+        mteam = team;
+        teamLoaded = true;
+        if (teamLoaded && controlsLoaded){
+            setupViewPager();
+        }
     }
 
     public CustomViewPager getViewPager() {
@@ -239,8 +250,12 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
         this.viewPager = viewPager;
     }
 
-    public void setControls(List<Control> controls) {
+    public void setControls(Map<String, List<Control>> controls) {
 
         mControls = controls;
+        controlsLoaded = true;
+        if (teamLoaded && controlsLoaded){
+            setupViewPager();
+        }
     }
 }

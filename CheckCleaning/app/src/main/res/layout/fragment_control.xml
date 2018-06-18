@@ -14,85 +14,63 @@
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="32dp"
-        android:onClick="onClickCustomProgress"
-        android:clickable="true"
-        android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <be.technifutur.checkcleaning.Util.CustomProgress
         android:id="@+id/custom_progress_meeting_room"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:onClick="onClickCustomProgress"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_progress_cafetaria"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_cafetaria"/>
 
     <be.technifutur.checkcleaning.Util.CustomProgress
         android:id="@+id/custom_progress_office"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:onClick="onClickCustomProgress"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_progress_meeting_room"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_meeting_room"/>
 
     <be.technifutur.checkcleaning.Util.CustomProgress
         android:id="@+id/custom_progress_open_space"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:onClick="onClickCustomProgress"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_progress_office"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_office" />
 
     <be.technifutur.checkcleaning.Util.CustomProgress
         android:id="@+id/custom_progress_relaxation_area"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:onClick="onClickCustomProgress"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_progress_open_space"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_open_space" />
 
     <be.technifutur.checkcleaning.Util.CustomProgress
         android:id="@+id/custom_progress_restaurant"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:onClick="onClickCustomProgress"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_progress_relaxation_area"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_relaxation_area"/>
 
     <be.technifutur.checkcleaning.Util.CustomProgress
         android:id="@+id/custom_progress_wc"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:onClick="onClickCustomProgress"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_progress_restaurant"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/custom_progress_restaurant" />
 
 
 </android.support.constraint.ConstraintLayout>

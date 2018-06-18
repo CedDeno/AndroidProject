@@ -1,7 +1,10 @@
 package be.technifutur.checkcleaning.presenter;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import be.technifutur.checkcleaning.activity.BottomBarActivity;
 import be.technifutur.checkcleaning.entity.Building;
@@ -39,13 +42,22 @@ public class BottomBarPresenter implements OnGetTeamFinishedListener, OnGetContr
 
     public void loadControls() {
 
-        mControlRepo.getByBuildingId(mbuilding.getId(), this);
+        List<String> categories = new ArrayList<>();
+        categories.add("cafetaria");
+        categories.add("meeting_room");
+        categories.add("office");
+        categories.add("open_space");
+        categories.add("relaxation_area");
+        categories.add("restaurant");
+        categories.add("wc");
+        mControlRepo.getByBuildingId(mbuilding.getId(), categories, this);
     }
 
     @Override
-    public void onGetControlsSuccess(List<Control> controls) {
+    public void onGetControlsSuccess(Map<String, List<Control>> controls) {
 
-        Collections.sort(controls);
+        int i = controls.size();
+
         mView.setControls(controls);
     }
 }

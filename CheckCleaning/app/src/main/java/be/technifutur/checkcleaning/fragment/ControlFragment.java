@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Map;
 
 import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.Util.CustomProgress;
@@ -16,9 +17,10 @@ import be.technifutur.checkcleaning.entity.Building;
 import be.technifutur.checkcleaning.entity.Control;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class ControlFragment extends Fragment {
+public class ControlFragment extends Fragment implements View.OnClickListener {
 
     Unbinder unbinder;
     @BindView(R.id.custom_progress_cafetaria)
@@ -37,13 +39,13 @@ public class ControlFragment extends Fragment {
     CustomProgress customProgressWc;
 
     private Building mBuilding;
-    private List<Control> mControls;
+    private Map<String, List<Control>> mControls;
 
     public ControlFragment() {
 
     }
 
-    public static ControlFragment newInstance(Building building, List<Control> controls) {
+    public static ControlFragment newInstance(Building building, Map<String, List<Control>> controls) {
 
         ControlFragment fragment = new ControlFragment();
         fragment.mBuilding = building;
@@ -64,30 +66,26 @@ public class ControlFragment extends Fragment {
 
         prepareCustomsProgress();
 
-        setCustomProgress(customProgressCafetaria, "Cafétaria", 0, mBuilding.getCafetaria_count());
-        setCustomProgress(customProgressMeetingRoom, "Salle de réunion", 0, mBuilding.getMeeting_room_count());
-        setCustomProgress(customProgressOffice, "Bureau", 0, mBuilding.getOffice_count());
-        setCustomProgress(customProgressOpenSpace, "Espace libre", 0, mBuilding.getOpen_space_count());
-        setCustomProgress(customProgressRelaxationArea, "Zone détente", 0, mBuilding.getRelaxation_area_count());
-        setCustomProgress(customProgressRestaurant, "Restaurant", 0, mBuilding.getRestaurant_count());
-        setCustomProgress(customProgressWc, "WC", 0, mBuilding.getWc_count());
+        customProgressCafetaria.setOnClickListener(this);
+
+        setCustomProgress(customProgressCafetaria, "Cafétaria", mControls.get("cafetaria").size(), mBuilding.getCafetaria_count());
+        setCustomProgress(customProgressMeetingRoom, "Salle de réunion", mControls.get("meeting_room").size(), mBuilding.getMeeting_room_count());
+        setCustomProgress(customProgressOffice, "Bureau", mControls.get("office").size(), mBuilding.getOffice_count());
+        setCustomProgress(customProgressOpenSpace, "Espace libre", mControls.get("open_space").size(), mBuilding.getOpen_space_count());
+        setCustomProgress(customProgressRelaxationArea, "Zone détente", mControls.get("relaxation_area").size(), mBuilding.getRelaxation_area_count());
+        setCustomProgress(customProgressRestaurant, "Restaurant", mControls.get("restaurant").size(), mBuilding.getRestaurant_count());
+        setCustomProgress(customProgressWc, "WC", mControls.get("wc").size(), mBuilding.getWc_count());
 
         unbinder = ButterKnife.bind(this, view);
 
         return view;
     }
-
-    public void onClickCustomProgress(View v){
-
-        Toast.makeText(getContext(), "ONCLICK", Toast.LENGTH_LONG).show();
-    }
-
+    
     public void setCustomProgress(CustomProgress cp, String name, int currentNb, int maxNb){
 
-        float floatNb = (currentNb / 5) * 100;
+        float floatNb = ((float)currentNb / (float)maxNb);
         cp.setMaximumPercentage(floatNb);
-        cp.setText(name + "   " + currentNb + " / " + maxNb);
-
+        cp.setText(name);
     }
 
     public void prepareCustomsProgress(){
@@ -152,5 +150,44 @@ public class ControlFragment extends Fragment {
     public void onDestroyView() {
         unbinder.unbind();
         super.onDestroyView();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        String title;
+
+        switch (v.getId()){
+
+            case R.id.custom_progress_cafetaria :
+                title = "Cafétaria";
+                break;
+
+            case R.id.custom_progress_meeting_room :
+                title = "Salle de réunion";
+                break;
+
+            case R.id.custom_progress_office :
+                title = "Bureau";
+                break;
+
+            case R.id.custom_progress_open_space :
+                title = "Espace libre";
+                break;
+
+            case R.id.custom_progress_relaxation_area :
+                title = "Zone détente";
+                break;
+
+            case R.id.custom_progress_restaurant :
+                title = "Restaurant";
+                break;
+
+            case R.id.custom_progress_wc :
+                title = "W.C.";
+                break;
+        }
+
+
     }
 }

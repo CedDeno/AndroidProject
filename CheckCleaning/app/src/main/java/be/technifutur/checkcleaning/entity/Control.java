@@ -1,11 +1,7 @@
 package be.technifutur.checkcleaning.entity;
 
-import android.support.annotation.NonNull;
+public class Control{
 
-public class Control implements Comparable<Control>{
-
-    private String id;
-    private String category;
     private String detail;
     private int rating;
     private String comment;
@@ -13,28 +9,10 @@ public class Control implements Comparable<Control>{
     public Control() {
     }
 
-    public Control(String id, String category, String detail, int rating, String comment) {
-        this.id = id;
-        this.category = category;
+    public Control(String detail, int rating, String comment) {
         this.detail = detail;
         this.rating = rating;
         this.comment = comment;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getDetail() {
@@ -59,15 +37,6 @@ public class Control implements Comparable<Control>{
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public int compareTo(@NonNull Control t) {
-
-        if(category.equals(t.category)){
-            return 0;
-        }else{
-            return -1;
-        }
     }
 }
 
