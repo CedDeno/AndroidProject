@@ -2,6 +2,7 @@ package be.technifutur.checkcleaning.presenter;
 
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -39,9 +40,14 @@ public class TodoPresenter implements OnGetTasksFinishedListener, OnUpdateTasksF
         Toast.makeText(mView.getContext(), "TASKS = " + mUser.getTasks().toString() + " SELECTIONS = " + selections.toString(), Toast.LENGTH_LONG).show();
         System.out.println("TASKS = " + mUser.getTasks().toString() + " SELECTIONS = " + selections.toString());
 
-        for (int i : selections){
+        List<Integer> intList = new ArrayList<>();
+        for (int i  : selections){
 
-            mUser.getTasks().remove(i);
+            intList.add(i);
+        }
+
+        for (int i = intList.size() - 1; i >= 0; i--){
+            mUser.getTasks().remove(intList.get(i));
         }
 
         mRepo.updateTasks(mUser, this);
