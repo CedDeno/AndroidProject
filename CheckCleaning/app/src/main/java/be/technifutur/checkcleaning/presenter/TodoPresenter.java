@@ -47,7 +47,8 @@ public class TodoPresenter implements OnGetTasksFinishedListener, OnUpdateTasksF
         }
 
         for (int i = intList.size() - 1; i >= 0; i--){
-            mUser.getTasks().remove(intList.get(i));
+            int selection = intList.get(i);
+            mUser.getTasks().remove(selection);
         }
 
         mRepo.updateTasks(mUser, this);
