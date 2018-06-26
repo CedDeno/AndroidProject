@@ -5,8 +5,6 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_color"
-    android:clickable="true"
     tools:context=".fragment.CreateTaskFragment">
 
     <TextView
@@ -46,6 +44,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+
         android:background="@drawable/button_design"
         android:text="@string/validate_button_text"
         android:textColor="@color/colorWhite"

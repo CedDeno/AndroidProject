@@ -1,262 +1,349 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CreateBuildingActivity"
-    android:fitsSystemWindows="true">
+    android:minHeight="800dp">
 
-    <TextView
-        android:id="@+id/required_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Requis"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/build_name_editText"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/edittext_design"
-        android:ems="10"
-        android:hint="@string/createBuilding_name_hint"
-        android:inputType="textPersonName"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/required_textView" />
-
-    <EditText
-        android:id="@+id/build_address_editText"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/edittext_design"
-        android:lines="2"
-        android:ems="10"
-        android:padding="8dp"
-        android:inputType="textPersonName"
-        android:hint="@string/createBuilding_address_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/build_name_editText" />
-
-    <TextView
-        android:id="@+id/optional_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="Optionnel"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/build_address_editText" />
-
-    <Button
-        android:id="@+id/build_create_button"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/createBuilding_button_text"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/button_design"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:minHeight="690dp"
+        tools:context=".activity.CreateBuildingActivity">
 
-    <TextView
-        android:id="@+id/cafetaria_count_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="38dp"
-        android:text="Cafetaria"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optional_textView" />
+        <TextView
+            android:id="@+id/required_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Requis"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/cafetaria_count_editText"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/edittext_design"
-        android:selectAllOnFocus="true"
-        android:text="0"
-        android:textAlignment="center"
-        android:padding="8dp"
-        android:ems="10"
-        android:inputType="numberSigned"
-        app:layout_constraintStart_toEndOf="@+id/cafetaria_count_textView"
-        app:layout_constraintTop_toBottomOf="@+id/optional_textView" />
+        <EditText
+            android:id="@+id/build_name_editText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:hint="@string/createBuilding_name_hint"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/required_textView" />
 
-    <TextView
-        android:id="@+id/meeting_room_count_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="38dp"
-        android:text="Salle de réunion"
-        app:layout_constraintEnd_toStartOf="@+id/meeting_room_count_editText"
-        app:layout_constraintTop_toBottomOf="@+id/optional_textView" />
+        <EditText
+            android:id="@+id/build_address_editText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:hint="@string/createBuilding_address_hint"
+            android:inputType="textPersonName"
+            android:lines="2"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/build_name_editText" />
 
-    <EditText
-        android:id="@+id/meeting_room_count_editText"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/edittext_design"
-        android:padding="8dp"
-        android:textAlignment="center"
-        android:selectAllOnFocus="true"
-        android:text="0"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optional_textView" />
+        <EditText
+            android:id="@+id/build_cp_editText"
+            android:layout_width="113dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:hint="Code postal"
+            android:inputType="phone"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/build_address_editText" />
 
-    <TextView
-        android:id="@+id/office_count_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="48dp"
-        android:text="Bureau"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cafetaria_count_textView" />
+        <EditText
+            android:id="@+id/build_city_editText"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:hint="Ville"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/build_address_editText" />
 
-    <EditText
-        android:id="@+id/office_count_editText"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="38dp"
-        android:background="@drawable/edittext_design"
-        android:text="0"
-        android:textAlignment="center"
-        android:selectAllOnFocus="true"
-        android:padding="8dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintStart_toEndOf="@+id/office_count_textView"
-        app:layout_constraintTop_toBottomOf="@+id/cafetaria_count_textView" />
+        <TextView
+            android:id="@+id/optional_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Optionnel"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/build_cp_editText" />
 
-    <TextView
-        android:id="@+id/open_space_count_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="48dp"
-        android:text="Espace libre"
-        app:layout_constraintEnd_toStartOf="@+id/open_space_count_editText"
-        app:layout_constraintTop_toBottomOf="@+id/meeting_room_count_textView" />
+        <Button
+            android:id="@+id/build_create_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_design"
+            android:text="@string/createBuilding_button_text"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shower_count_editText" />
 
-    <EditText
-        android:id="@+id/open_space_count_editText"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="38dp"
-        android:background="@drawable/edittext_design"
-        android:padding="8dp"
-        android:textAlignment="center"
-        android:selectAllOnFocus="true"
-        android:text="0"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meeting_room_count_textView" />
+        <TextView
+            android:id="@+id/kitchenette_count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="38dp"
+            android:text="Kitchenette"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/optional_textView" />
 
-    <TextView
-        android:id="@+id/relaxation_area_count_textView"
-        android:layout_width="60dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="39dp"
-        android:lines="2"
-        android:text="Zone de détente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/office_count_textView" />
+        <EditText
+            android:id="@+id/kitchenette_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="numberSigned"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/kitchenette_count_textView"
+            app:layout_constraintTop_toBottomOf="@+id/optional_textView" />
 
-    <EditText
-        android:id="@+id/relaxation_area_count_editText"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="38dp"
-        android:background="@drawable/edittext_design"
-        android:text="0"
-        android:textAlignment="center"
-        android:selectAllOnFocus="true"
-        android:padding="8dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintStart_toEndOf="@+id/relaxation_area_count_textView"
-        app:layout_constraintTop_toBottomOf="@+id/office_count_textView" />
+        <TextView
+            android:id="@+id/meeting_room_count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="38dp"
+            android:text="Salle de réunion"
+            app:layout_constraintEnd_toStartOf="@+id/meeting_room_count_editText"
+            app:layout_constraintTop_toBottomOf="@+id/optional_textView" />
 
-    <TextView
-        android:id="@+id/restaurant_count_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="48dp"
-        android:text="Restaurant"
-        app:layout_constraintEnd_toStartOf="@+id/restaurant_count_editText"
-        app:layout_constraintTop_toBottomOf="@+id/open_space_count_textView" />
+        <EditText
+            android:id="@+id/meeting_room_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/optional_textView" />
 
-    <EditText
-        android:id="@+id/restaurant_count_editText"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="38dp"
-        android:background="@drawable/edittext_design"
-        android:padding="8dp"
-        android:textAlignment="center"
-        android:selectAllOnFocus="true"
-        android:text="0"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open_space_count_textView" />
+        <TextView
+            android:id="@+id/office_count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="48dp"
+            android:text="Bureau"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kitchenette_count_textView" />
 
-    <TextView
-        android:id="@+id/wc_count_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="40dp"
-        android:text="W.C."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relaxation_area_count_textView" />
+        <EditText
+            android:id="@+id/office_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/office_count_textView"
+            app:layout_constraintTop_toBottomOf="@+id/kitchenette_count_textView" />
 
-    <EditText
-        android:id="@+id/wc_count_editText"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/edittext_design"
-        android:text="0"
-        android:textAlignment="center"
-        android:selectAllOnFocus="true"
-        android:padding="8dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintStart_toEndOf="@+id/wc_count_textView"
-        app:layout_constraintTop_toBottomOf="@+id/relaxation_area_count_textView" />
+        <TextView
+            android:id="@+id/open_space_count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="48dp"
+            android:text="Espace libre"
+            app:layout_constraintEnd_toStartOf="@+id/open_space_count_editText"
+            app:layout_constraintTop_toBottomOf="@+id/meeting_room_count_textView" />
 
-</android.support.constraint.ConstraintLayout>
+        <EditText
+            android:id="@+id/open_space_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meeting_room_count_textView" />
+
+        <TextView
+            android:id="@+id/relaxation_area_count_textView"
+            android:layout_width="60dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="39dp"
+            android:lines="2"
+            android:text="Zone de détente"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/office_count_textView" />
+
+        <EditText
+            android:id="@+id/relaxation_area_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/relaxation_area_count_textView"
+            app:layout_constraintTop_toBottomOf="@+id/office_count_textView" />
+
+        <TextView
+            android:id="@+id/restaurant_count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="48dp"
+            android:text="Restaurant"
+            app:layout_constraintEnd_toStartOf="@+id/restaurant_count_editText"
+            app:layout_constraintTop_toBottomOf="@+id/open_space_count_textView" />
+
+        <EditText
+            android:id="@+id/restaurant_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/open_space_count_textView" />
+
+        <TextView
+            android:id="@+id/wc_count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="40dp"
+            android:text="W.C."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relaxation_area_count_textView" />
+
+        <EditText
+            android:id="@+id/wc_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/wc_count_textView"
+            app:layout_constraintTop_toBottomOf="@+id/relaxation_area_count_textView" />
+
+        <TextView
+            android:id="@+id/shower_count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="40dp"
+            android:text="Douche"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wc_count_textView" />
+
+        <EditText
+            android:id="@+id/shower_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/shower_count_textView"
+            app:layout_constraintTop_toBottomOf="@+id/wc_count_textView" />
+
+        <TextView
+            android:id="@+id/parking_count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="48dp"
+            android:text="Parking"
+            app:layout_constraintEnd_toStartOf="@id/parking_count_editText"
+            app:layout_constraintTop_toBottomOf="@+id/restaurant_count_textView" />
+
+        <EditText
+            android:id="@+id/parking_count_editText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/edittext_design"
+            android:ems="10"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restaurant_count_textView" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

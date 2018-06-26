@@ -9,18 +9,16 @@ public class CreateControlPresenter implements OnCreateControlFinishedListener {
 
     private CreateControlFragment mView;
     private ControlRepository mRepo;
-    private Control mControl;
     private String mBuildingId;
 
-    public CreateControlPresenter(CreateControlFragment view, Control control) {
+    public CreateControlPresenter(CreateControlFragment view) {
         this.mView = view;
         mRepo = new ControlRepository();
-        mControl = control;
     }
 
-    public void createControl(String category){
+    public void createControl(String category, Control newControl){
 
-        mRepo.addControlToCategory(mBuildingId, category, mControl, this);
+        mRepo.addControlToCategory(mBuildingId, category, newControl, this);
     }
 
     @Override

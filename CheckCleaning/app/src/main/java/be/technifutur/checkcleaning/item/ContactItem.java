@@ -20,6 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.support.v4.app.ActivityCompat.requestPermissions;
+
 public class ContactItem extends AbstractItem<ContactItem, ContactItem.ViewHolder> {
 
     private final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
@@ -44,7 +46,7 @@ public class ContactItem extends AbstractItem<ContactItem, ContactItem.ViewHolde
 
     @Override
     public int getType() {
-        return R.id.PersonTextView;
+        return R.id.PhoneImageButton;
     }
 
     @Override
@@ -56,9 +58,6 @@ public class ContactItem extends AbstractItem<ContactItem, ContactItem.ViewHolde
 
         @BindView(R.id.PersonTextView)
         TextView personTextView;
-
-        @BindView(R.id.MyCheckBox)
-        CheckBox myCheckBox;
 
         @BindView(R.id.SmsImageButton)
         ImageButton smsImageButton;
@@ -93,7 +92,7 @@ public class ContactItem extends AbstractItem<ContactItem, ContactItem.ViewHolde
             Intent intent = new Intent(Intent.ACTION_SENDTO, msgUri);
             if (ActivityCompat.checkSelfPermission(itemView.getContext(), Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
 
-                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.SEND_SMS},
+                requestPermissions(activity, new String[]{Manifest.permission.SEND_SMS},
                         MY_PERMISSIONS_REQUEST_SEND_SMS);
                 return;
             }
@@ -108,7 +107,7 @@ public class ContactItem extends AbstractItem<ContactItem, ContactItem.ViewHolde
             Intent intent = new Intent(Intent.ACTION_CALL, uri);
             if (ActivityCompat.checkSelfPermission(itemView.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
-                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE},
+                requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE},
                         MY_PERMISSIONS_REQUEST_CALL_PHONE);
                 return;
             }
@@ -122,11 +121,15 @@ public class ContactItem extends AbstractItem<ContactItem, ContactItem.ViewHolde
 
             System.out.println("GRANT RESULT = " + grantResults.toString());
 
-            /*if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                onClickCallNumber();
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE){
+                    onCall();
+                }else if (requestCode == MY_PERMISSIONS_REQUEST_SEND_SMS){
+                    onSms();
+                }
             } else {
                 System.out.println("COUCOU");
-            }*/
+            }
         }
     }
 }

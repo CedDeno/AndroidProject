@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -12,20 +14,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustResize|adjustPan">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCquB3O1X3ht6kVhnxMJpa0HF0e5P_AaOo" />
+
+        <activity
+            android:name=".activity.LaunchActivity"
+            android:windowSoftInputMode="adjustResize|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.SignUpActivity" />
         <activity
             android:name=".activity.BottomBarActivity"
             android:label="@string/title_activity_bottom_bar"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.BuildingChoiceActivity" />
-        <activity android:name=".activity.CreateBuildingActivity" android:windowSoftInputMode="adjustResize|adjustPan"/>
+        <activity
+            android:name=".activity.CreateBuildingActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.SettingsActivity" />
     </application>
 
 </manifest>

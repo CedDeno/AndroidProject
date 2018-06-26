@@ -57,13 +57,12 @@ public class TeamFragment extends Fragment {
                 layoutManager.getOrientation());
         teamRecyclerView.addItemDecoration(dividerItemDecoration);
         teamRecyclerView.setClickable(true);
-        teamRecyclerView.setAdapter(contactItemAdapter);
         contactItemAdapter = new FastItemAdapter<>();
         for (User user : mBuildingUsers) {
             contactItemAdapter.add(new ContactItem(user, this.getActivity()));
         }
         contactItemAdapter.withSelectable(true);
-        contactItemAdapter.withSavedInstanceState(savedInstanceState);
+        teamRecyclerView.setAdapter(contactItemAdapter);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }

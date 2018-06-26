@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".activity.BottomBarActivity">
+
+    <item
+        android:id="@+id/change_building_item"
+        android:icon="@android:drawable/ic_menu_rotate"
+        android:iconTint="@color/buttonColorLight"
+        android:title="Changer de bâtiment" />
+    <item
+        android:id="@+id/settings_item"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:iconTint="@color/buttonColorLight"
+        android:title="Paramètres" />
+    <item
+        android:id="@+id/disconnection_item"
+        android:icon="@android:drawable/ic_menu_set_as"
+        android:iconTint="@color/buttonColorLight"
+        android:title="Déconnexion" />
+</menu>

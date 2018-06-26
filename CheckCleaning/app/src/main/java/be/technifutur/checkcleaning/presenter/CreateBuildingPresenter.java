@@ -1,6 +1,7 @@
 package be.technifutur.checkcleaning.presenter;
 
 import be.technifutur.checkcleaning.activity.CreateBuildingActivity;
+import be.technifutur.checkcleaning.entity.Structure;
 import be.technifutur.checkcleaning.listener.OnCreateBuildingFinishedListener;
 import be.technifutur.checkcleaning.entity.Building;
 import be.technifutur.checkcleaning.entity.User;
@@ -21,11 +22,12 @@ public class CreateBuildingPresenter implements OnCreateBuildingFinishedListener
         mUser = user;
     }
 
-    public void prepareNewBuilding(String name, String address) {
+    public void prepareNewBuilding(String name, String address, Structure struct) {
 
         Building building = new Building();
         building.setName(name);
         building.setAddress(address);
+        building.setStructure(struct);
         buildingRepo.createBuilding(building, this);
     }
 

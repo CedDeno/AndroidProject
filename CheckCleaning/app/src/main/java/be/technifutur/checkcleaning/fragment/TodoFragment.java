@@ -220,7 +220,10 @@ public class TodoFragment extends Fragment{
         }
 
         taskItemAdapter.notifyAdapterDataSetChanged();
+        //getActivity().setTitle("Notes");
         getActivity().getSupportFragmentManager().popBackStackImmediate();
+        mActivity.setFragmentIsOpen(false);
+        mActivity.getViewPager().setEnable(true);
 
     }
 

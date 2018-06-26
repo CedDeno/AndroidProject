@@ -1,5 +1,6 @@
 package be.technifutur.checkcleaning.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,14 +10,18 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import be.technifutur.checkcleaning.MainActivity;
 import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.Util.CustomViewPager;
 import be.technifutur.checkcleaning.adapter.ViewPagerAdapter;
@@ -27,6 +32,7 @@ import be.technifutur.checkcleaning.entity.User;
 import be.technifutur.checkcleaning.fragment.ControlFragment;
 import be.technifutur.checkcleaning.fragment.HomeFragment;
 import be.technifutur.checkcleaning.fragment.ReportFragment;
+import be.technifutur.checkcleaning.fragment.RootControlFragment;
 import be.technifutur.checkcleaning.fragment.RootTodoFragment;
 import be.technifutur.checkcleaning.fragment.TeamFragment;
 import be.technifutur.checkcleaning.presenter.BottomBarPresenter;
@@ -46,7 +52,7 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
     private FragmentManager manager = getSupportFragmentManager();
     private HomeFragment homeFragment;
     private RootTodoFragment rootTodoFragment;
-    private ControlFragment controlFragment;
+    private RootControlFragment rootControlFragment;
     private ReportFragment reportFragment;
     private TeamFragment teamFragment;
     private boolean wouldLikeDC;
@@ -76,23 +82,23 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    setTitle("Accueil");
+                    //setTitle("Accueil");
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_todo:
-                    setTitle("Notes");
+                    //setTitle("Notes");
                     viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_control:
-                    setTitle("Contrôle périodique");
+                    //setTitle("Contrôle périodique");
                     viewPager.setCurrentItem(2);
                     return true;
                 case R.id.navigation_report:
-                    setTitle("Radenopport journalier");
+                    //setTitle("Radenopport journalier");
                     viewPager.setCurrentItem(3);
                     return true;
                 case R.id.navigation_team:
-                    setTitle("Mon équipe");
+                    //setTitle("Mon équipe");
                     viewPager.setCurrentItem(4);
                     return true;
             }
@@ -119,15 +125,15 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
         setContentView(R.layout.activity_bottom_bar);
         ButterKnife.bind(this);
 
-        setTitle("Accueil");
-
         teamLoaded = false;
         controlsLoaded = false;
         wouldLikeDC = false;
         fragmentIsOpen = false;
+        mControls = new HashMap<>();
         mUser = getIntent().getExtras().getParcelable("user");
         mBuilding = getIntent().getExtras().getParcelable("building");
         mBuildingName = mBuilding.getName();
+        setTitle(mBuildingName);
         mPresenter = new BottomBarPresenter(this, mBuilding);
         Collections.sort(mUser.getTasks());
         viewPager.addOnPageChangeListener(this);
@@ -149,7 +155,7 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
             getSupportFragmentManager().popBackStackImmediate();
         } else {
             if (wouldLikeDC) {
-                super.onBackPressed();
+                moveTaskToBack(true);
             }
 
             wouldLikeDC = true;
@@ -185,7 +191,7 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
         }
         bottomNavigation.getMenu().getItem(position).setChecked(true);
         prevMenuItem = bottomNavigation.getMenu().getItem(position);
-        setTitleForFragment(position);
+        //setTitleForFragment(position);
     }
 
     @Override
@@ -195,14 +201,14 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
 
     public void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        homeFragment = new HomeFragment();
+        homeFragment = HomeFragment.newInstance(mBuilding);
         rootTodoFragment = RootTodoFragment.newInstance(this, mUser, mBuilding);
-        controlFragment = ControlFragment.newInstance(mBuilding, mControls);
+        rootControlFragment = RootControlFragment.newInstance(this, mBuilding);
         reportFragment = new ReportFragment();
         teamFragment = TeamFragment.newInstance(mUser, mteam);
         adapter.addFragment(homeFragment);
         adapter.addFragment(rootTodoFragment);
-        adapter.addFragment(controlFragment);
+        adapter.addFragment(rootControlFragment);
         adapter.addFragment(reportFragment);
         adapter.addFragment(teamFragment);
         viewPager.setAdapter(adapter);
@@ -257,5 +263,36 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
         if (teamLoaded && controlsLoaded){
             setupViewPager();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_bottom_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        Intent intent;
+
+        switch (item.getItemId()){
+            case R.id.change_building_item :
+                intent = new Intent(this, BuildingChoiceActivity.class);
+                intent.putExtra("user", mUser);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.settings_item :
+                intent = new Intent(this, SettingsActivity.class);
+                intent.putExtra("user", mUser);
+                intent.putExtra("building", mBuilding);
+                startActivity(intent);
+                return true;
+            case R.id.disconnection_item :
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

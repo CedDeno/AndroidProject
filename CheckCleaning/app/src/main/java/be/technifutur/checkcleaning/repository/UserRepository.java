@@ -23,6 +23,7 @@ import be.technifutur.checkcleaning.listener.OnGetTeamFinishedListener;
 import be.technifutur.checkcleaning.listener.OnGetUserFinishedListener;
 import be.technifutur.checkcleaning.listener.OnLoginFinishedListener;
 import be.technifutur.checkcleaning.entity.User;
+import be.technifutur.checkcleaning.listener.OnUpdateUserFinishedListener;
 
 public class UserRepository{
 
@@ -103,24 +104,36 @@ public class UserRepository{
 
         for (int i = 0; i < size; i++){
 
-            final String userId = usersId.get(i);
+            if (!usersId.get(i).equals(mAuth.getUid())){
+                final String userId = usersId.get(i);
 
-            DocumentReference docRef = mDatabase.collection("user").document(userId);
+                DocumentReference docRef = mDatabase.collection("user").document(userId);
 
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if(task.isSuccessful()){
-                        User user = task.getResult().toObject(User.class);
-                        team.add(user);
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            User user = task.getResult().toObject(User.class);
+                            team.add(user);
 
-                        if(usersId.size() == team.size()){
-                            listener.onGetTeamSuccess(team);
+                            if(usersId.size() - 1 == team.size()){
+                                listener.onGetTeamSuccess(team);
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
         }
+    }
+
+    public void updateUser(User user, final OnUpdateUserFinishedListener listener){
+
+        mDatabase.collection("user").document(user.getId()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                listener.onUpdateUserSuccess();
+            }
+        });
     }
 }

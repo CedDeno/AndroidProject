@@ -2,8 +2,11 @@ package be.technifutur.checkcleaning.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.NumberPicker;
+import android.widget.Toast;
+
 import java.util.List;
 import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.entity.Building;
@@ -23,6 +26,7 @@ public class BuildingChoiceActivity extends AppCompatActivity implements NumberP
     private List<Building> mBuildings;
     private Building selectedBuilding;
     private boolean isNewBuilding;
+    private boolean wouldLikeDC;
     private final int CREATION_BUILD_REQUEST_CODE = 145;
 
     @Override
@@ -38,6 +42,7 @@ public class BuildingChoiceActivity extends AppCompatActivity implements NumberP
         mPresenter = new BuildingChoicePresenter(this);
         mPresenter.loadBuildingsByUser(mUser.getBuildings_id());
         pickerBuilding.setOnValueChangedListener(this);
+        wouldLikeDC = false;
     }
 
     @OnClick(R.id.btnChoiceBuilding)
@@ -92,5 +97,23 @@ public class BuildingChoiceActivity extends AppCompatActivity implements NumberP
         System.out.println("isNewBuilding = " + isNewBuilding);
         System.out.println("new Val = " + newVal);
         selectedBuilding = mBuildings.get(newVal);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (wouldLikeDC) {
+            moveTaskToBack(true);
+        }
+
+        wouldLikeDC = true;
+        Toast.makeText(this, "Appuyez sur retour une deuxième fois pour quitter.", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                wouldLikeDC = false;
+            }
+        }, 2000);
     }
 }

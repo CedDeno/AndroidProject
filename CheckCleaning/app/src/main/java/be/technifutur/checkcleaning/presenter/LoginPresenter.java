@@ -1,9 +1,6 @@
 package be.technifutur.checkcleaning.presenter;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import be.technifutur.checkcleaning.MainActivity;
-import be.technifutur.checkcleaning.fragment.LoadingAnimationFragment;
 import be.technifutur.checkcleaning.listener.OnGetUserFinishedListener;
 import be.technifutur.checkcleaning.listener.OnLoginFinishedListener;
 import be.technifutur.checkcleaning.entity.User;
@@ -33,7 +30,7 @@ public class LoginPresenter implements OnLoginFinishedListener, OnGetUserFinishe
     public void userExist(){
 
         if(userRepo.isAuthentificate()){
-            mView.startAnimationActivity();
+            mView.startAnimationFragment();
             userRepo.getById(this);
         }
     }
@@ -55,7 +52,7 @@ public class LoginPresenter implements OnLoginFinishedListener, OnGetUserFinishe
     @Override
     public void onLoginSuccess() {
 
-        mView.startAnimationActivity();
+        mView.startAnimationFragment();
         userRepo.getById(this);
     }
 

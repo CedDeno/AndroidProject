@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CheckCleaning</string>
+    <string name="app_name">CheckClean</string>
     <string name="connection_button_text">Connexion</string>
     <string name="login_textView_hint">Login</string>
     <string name="password_textView_hint">Mot de passe</string>
@@ -27,4 +27,28 @@
     <string name="createBuilding_address_hint">Adresse</string>
     <string name="createBuilding_button_text">Valider</string>
     <string name="title_creationBuilding">Création d\'un chantier</string>
+    <string name="kitchenette_category_key">Kitchenette</string>
+    <string name="meeting_room_category_key">meeting_room</string>
+    <string name="office_category_key">office</string>
+    <string name="open_space_category_key">open_space</string>
+    <string name="relaxation_area_category_key">relaxation_area</string>
+    <string name="restaurant_category_key">restaurant</string>
+    <string name="wc_category_key">wc</string>
+    <string name="kitchenette_category_title">Kitchenette</string>
+    <string name="meeting_room_category_title">Salle de réunion</string>
+    <string name="office_category_title">Bureau</string>
+    <string name="open_space_category_title">Espace libre</string>
+    <string name="relaxation_area_category_title">Zone détente</string>
+    <string name="restaurant_category_title">Restaurant</string>
+    <string name="wc_category_title">W.C.</string>
+    <string name="shower_category_key">shower</string>
+    <string name="parkin_category_key">parking</string>
+    <string name="shower_category_title">Douche</string>
+    <string name="parking_category_title">Parking</string>
+    <string name="report_place_textView">Lieu</string>
+    <string name="report_comment_textView">Commentaire</string>
+    <string name="take_picture_button">Prendre une photo</string>
+    <string name="report_send_button">Envoyer</string>
+    <string name="report_place_hint">Nom salle, n°,...</string>
+    <string name="report_comment_hint">Problème, remarque, ...</string>
 </resources>

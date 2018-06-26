@@ -25,16 +25,11 @@ import butterknife.Unbinder;
 public class CreateTaskFragment extends Fragment {
 
     TodoFragment mFragment;
-    Unbinder unbinder;
-
-    @BindView(R.id.createTask_textView)
-    TextView createTaskTextView;
 
     @BindView(R.id.createTask_editText)
     EditText createTaskEditText;
 
-    @BindView(R.id.createTask_button)
-    Button createTaskButton;
+    Unbinder unbinder;
 
     private User mUser;
     private Building mBuilding;
@@ -60,7 +55,6 @@ public class CreateTaskFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
-        getActivity().setTitle("Création d'une tâche");
         ButterKnife.bind(this, view);
 
         mPresenter = new CreateTaskPresenter(this, mUser);
@@ -72,13 +66,15 @@ public class CreateTaskFragment extends Fragment {
     @OnClick(R.id.createTask_button)
     public void onValidateTask() {
         if (isClickable) {
-            mPresenter.saveTask(createTaskEditText.getText().toString(), mBuilding.getName());
+            String task = createTaskEditText.getText().toString();
+            mPresenter.saveTask(task, mBuilding.getName());
             isClickable = false;
         }
     }
 
     @Override
     public void onDestroyView() {
+        createTaskEditText.clearFocus();
         unbinder.unbind();
         super.onDestroyView();
     }
