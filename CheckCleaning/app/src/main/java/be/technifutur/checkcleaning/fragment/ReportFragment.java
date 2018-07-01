@@ -4,25 +4,44 @@ package be.technifutur.checkcleaning.fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
+import android.graphics.pdf.PdfRenderer;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mindorks.paracamera.Camera;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.activity.BottomBarActivity;
 import be.technifutur.checkcleaning.entity.Building;
-import be.technifutur.checkcleaning.item.PictureItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static be.technifutur.checkcleaning.R.color.blackLightColor;
+import static be.technifutur.checkcleaning.R.color.buttonColor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,9 +57,16 @@ public class ReportFragment extends Fragment {
     @BindView(R.id.report_picture_imageView)
     ImageView reportPictureImageView;
     Unbinder unbinder;
+    @BindView(R.id.report_generate_button)
+    Button reportGenerateButton;
     private BottomBarActivity mActivity;
     private Building mBuilding;
     private Camera mCamera;
+    //For opening current page, render it, and close the page
+    private PdfRenderer.Page mCurrentPage;
+    //Currently rendered Pdf file
+    private File openedPdfFile;
+    private SimpleDateFormat sdf;
 
     public ReportFragment() {
 
@@ -50,6 +76,7 @@ public class ReportFragment extends Fragment {
         ReportFragment fragment = new ReportFragment();
         fragment.mBuilding = building;
         fragment.mActivity = activity;
+        fragment.sdf = new SimpleDateFormat("dd-MM-yyyy");
         return fragment;
     }
 
@@ -87,7 +114,7 @@ public class ReportFragment extends Fragment {
                 .setName("ali_" + System.currentTimeMillis())
                 .setImageFormat(Camera.IMAGE_JPEG)
                 .setCompression(75)
-                .setImageHeight(250)// it will try to achieve this height as close as possible maintaining the aspect ratio;
+                .setImageHeight(190)// it will try to achieve this height as close as possible maintaining the aspect ratio;
                 .build(this);
 
         try {
@@ -117,9 +144,133 @@ public class ReportFragment extends Fragment {
         }
     }
 
+    public void loadPDFFragment(){
+
+        Fragment fragment = PDFReaderFragment.newInstance(mActivity, openedPdfFile);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.fade_in_bottom, android.R.animator.fade_out);
+        ft.replace(R.id.fragment_root_report_id, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.addToBackStack(null);
+        ft.commit();
+        mActivity.setFragmentIsOpen(true);
+        mActivity.getViewPager().setEnable(false);
+        reportGenerateButton.setEnabled(true);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.report_generate_button)
+    public void onGeneratePDF(){
+
+        new PdfGenerationTask().execute();
+        reportGenerateButton.setEnabled(false);
+    }
+
+    private class PdfGenerationTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            PdfDocument document = new PdfDocument();
+            // repaint the user's text into the page
+            String roomTitle = "Lieu";
+            String roomDesc = reportPlaceEditText.getText().toString();
+            String commentTitle = "Commentaire";
+            String commentDesc = reportCommentEditText.getText().toString();
+            View view = getView();
+
+            // create a page description
+            int pageNumber = 2;
+            System.out.println("View Height = " + view.getHeight());
+            System.out.println("View Width = " + view.getWidth());
+
+            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(view.getWidth() - 16,
+                    view.getHeight() - 36, pageNumber).create();
+
+            // create a new page from the PageInfo
+            PdfDocument.Page page = document.startPage(pageInfo);
+            Canvas canvas = page.getCanvas();
+            System.out.println("Canvas Height = " + canvas.getHeight());
+            System.out.println("Canvas Width = " + canvas.getWidth());
+            Paint paint = new Paint();
+            paint.setStyle(Paint.Style.FILL);
+            paint.setAntiAlias(true);
+            paint.setARGB(255, 255, 255, 255);
+
+            //Title of Report
+            paint.setTextSize(60);
+            paint.setColor(getResources().getColor(R.color.md_black_1000));
+            canvas.drawText("Rapport du " + sdf.format(Calendar.getInstance().getTime()),
+                    100, 140, paint);
+
+            //Logo of app
+            Bitmap bitmapLogo = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+            canvas.drawBitmap(bitmapLogo, canvas.getWidth() - 180, 50, paint);
+
+            //Room title
+            paint.setTextSize(50);
+            paint.setColor(getResources().getColor(R.color.buttonColor));
+            canvas.drawText(roomTitle, 60, 300, paint);
+
+            //Room desc
+            paint.setTextSize(40);
+            paint.setColor(getResources().getColor(R.color.md_black_1000));
+            canvas.drawText(roomDesc, 120, 420, paint);
+
+            //Comment title
+            paint.setTextSize(50);
+            paint.setColor(getResources().getColor(R.color.buttonColor));
+            canvas.drawText(commentTitle, 60, 600, paint);
+
+            //Comment desc
+            paint.setTextSize(40);
+            paint.setColor(getResources().getColor(R.color.md_black_1000));
+            canvas.drawText(commentDesc, 120, 720, paint);
+
+            //Picture title
+            paint.setTextSize(50);
+            paint.setColor(getResources().getColor(R.color.buttonColor));
+            canvas.drawText("Photo", 60, 1120, paint);
+
+            //Picture image
+            reportPictureImageView.buildDrawingCache();
+            Bitmap bitmapPicture = reportPictureImageView.getDrawingCache();
+            canvas.drawBitmap(bitmapPicture, 120, 1240, paint);
+
+            // do final processing of the page
+            document.finishPage(page);
+
+            String pdfName = mBuilding.getName() + "_rapport_journalier_" + sdf.format(Calendar.getInstance().getTime()) + ".pdf";
+
+            openedPdfFile = new File(getActivity().getFilesDir(), pdfName);
+
+            try {
+                openedPdfFile.createNewFile();
+                OutputStream out = new FileOutputStream(openedPdfFile);
+                document.writeTo(out);
+                document.close();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return openedPdfFile.getPath();
+        }
+
+        @Override
+        protected void onPostExecute(String filePath) {
+            if (filePath != null) {
+
+                loadPDFFragment();
+            } else {
+                Toast.makeText(getContext(), "C'est la merde dans ReportFragment/PdfGenerationTask", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 }

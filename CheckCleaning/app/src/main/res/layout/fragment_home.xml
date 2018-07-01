@@ -3,16 +3,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/home_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:background="@drawable/background_color"
         android:clickable="true"
-        android:minHeight="600dp"
         tools:context=".fragment.HomeFragment">
 
         <TextView
@@ -20,23 +19,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary"
-            android:padding="6dp"
-            android:text="Graph"
+            android:padding="9dp"
+            android:text="Graphique de qualité"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/home_graph_inProgress_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/home_barChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="100dp"
-            android:text="En développement."
-            android:textSize="30sp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_graph_textView" />
@@ -45,26 +42,38 @@
             android:id="@+id/home_localization_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="32dp"
             android:background="@color/primary"
-            android:padding="6dp"
+            android:padding="9dp"
             android:text="Localisation"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_graph_inProgress_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/home_barChart" />
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/home_map"
             class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="300dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_localization_textView" />
 
+        <TextView
+            android:id="@+id/home_building_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOCATION"
+            android:padding="15dp"
+            android:textAlignment="center"
+            android:maxLines="2"
+            app:layout_constraintTop_toBottomOf="@id/home_map"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

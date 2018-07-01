@@ -64,6 +64,7 @@ public class SettingsAccountFragment extends Fragment implements TextWatcher {
         lastNameEditText.addTextChangedListener(this);
         mobileNumberEditText.addTextChangedListener(this);
         updateButton.setEnabled(false);
+        updateButton.setBackgroundColor(getResources().getColor(R.color.colorGrey));
         mPresenter = new SettingsAccountPresenter(this, mUser);
 
         unbinder = ButterKnife.bind(this, view);

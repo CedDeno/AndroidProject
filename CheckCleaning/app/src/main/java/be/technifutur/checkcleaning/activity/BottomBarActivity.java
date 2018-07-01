@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -27,12 +29,15 @@ import be.technifutur.checkcleaning.Util.CustomViewPager;
 import be.technifutur.checkcleaning.adapter.ViewPagerAdapter;
 import be.technifutur.checkcleaning.entity.Building;
 import be.technifutur.checkcleaning.entity.Control;
+import be.technifutur.checkcleaning.entity.ControlDB;
 import be.technifutur.checkcleaning.entity.TaskData;
 import be.technifutur.checkcleaning.entity.User;
 import be.technifutur.checkcleaning.fragment.ControlFragment;
 import be.technifutur.checkcleaning.fragment.HomeFragment;
+import be.technifutur.checkcleaning.fragment.LoadingAnimationFragment;
 import be.technifutur.checkcleaning.fragment.ReportFragment;
 import be.technifutur.checkcleaning.fragment.RootControlFragment;
+import be.technifutur.checkcleaning.fragment.RootReportFragment;
 import be.technifutur.checkcleaning.fragment.RootTodoFragment;
 import be.technifutur.checkcleaning.fragment.TeamFragment;
 import be.technifutur.checkcleaning.presenter.BottomBarPresenter;
@@ -53,14 +58,14 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
     private HomeFragment homeFragment;
     private RootTodoFragment rootTodoFragment;
     private RootControlFragment rootControlFragment;
-    private ReportFragment reportFragment;
+    private RootReportFragment rootReportFragment;
     private TeamFragment teamFragment;
     private boolean wouldLikeDC;
     private MenuItem prevMenuItem;
     public static String mBuildingName;
     private boolean fragmentIsOpen;
     private BottomBarPresenter mPresenter;
-    private Map<String, List<Control>> mControls;
+    private List<ControlDB> mControlDBs;
     private List<User> mteam;
     private boolean teamLoaded;
     private boolean controlsLoaded;
@@ -125,11 +130,12 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
         setContentView(R.layout.activity_bottom_bar);
         ButterKnife.bind(this);
 
+
+        startAnimationFragment();
         teamLoaded = false;
         controlsLoaded = false;
         wouldLikeDC = false;
         fragmentIsOpen = false;
-        mControls = new HashMap<>();
         mUser = getIntent().getExtras().getParcelable("user");
         mBuilding = getIntent().getExtras().getParcelable("building");
         mBuildingName = mBuilding.getName();
@@ -201,17 +207,18 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
 
     public void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        homeFragment = HomeFragment.newInstance(mBuilding);
+        homeFragment = HomeFragment.newInstance(mBuilding, mControlDBs);
         rootTodoFragment = RootTodoFragment.newInstance(this, mUser, mBuilding);
         rootControlFragment = RootControlFragment.newInstance(this, mBuilding);
-        reportFragment = new ReportFragment();
+        rootReportFragment = RootReportFragment.newInstance(this, mBuilding);
         teamFragment = TeamFragment.newInstance(mUser, mteam);
         adapter.addFragment(homeFragment);
         adapter.addFragment(rootTodoFragment);
         adapter.addFragment(rootControlFragment);
-        adapter.addFragment(reportFragment);
+        adapter.addFragment(rootReportFragment);
         adapter.addFragment(teamFragment);
         viewPager.setAdapter(adapter);
+        showBottomBarActivity();
     }
 
     public void setTitleForFragment(int position){
@@ -256,9 +263,9 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
         this.viewPager = viewPager;
     }
 
-    public void setControls(Map<String, List<Control>> controls) {
+    public void setControls(List<ControlDB> controlDBs) {
 
-        mControls = controls;
+        mControlDBs = controlDBs;
         controlsLoaded = true;
         if (teamLoaded && controlsLoaded){
             setupViewPager();
@@ -291,8 +298,32 @@ public class BottomBarActivity extends AppCompatActivity implements ViewPager.On
                 startActivity(intent);
                 return true;
             case R.id.disconnection_item :
+                mPresenter.disconnectUser();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void startAnimationFragment() {
+
+        Fragment fragment = new LoadingAnimationFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.fade_in_bottom, android.R.animator.fade_out);
+        ft.replace(R.id.bottom_activity_id, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    public void showBottomBarActivity() {
+
+        getSupportFragmentManager().popBackStackImmediate();
+    }
+
+    public void returnToMainActivity() {
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

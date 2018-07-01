@@ -35,10 +35,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+
+
         loginPresenter = new LoginPresenter(this);
 
         loginPresenter.userExist();
     }
+
 
 
     @OnClick(R.id.sign_in_button)
@@ -75,10 +78,11 @@ public class MainActivity extends AppCompatActivity {
         //BuildingChoiceFragment fragment = BuildingChoiceFragment.newInstance(user);
         //getSupportFragmentManager().beginTransaction().add(R.id.main_activity, fragment).addToBackStack(null).commit();
 
+        getSupportFragmentManager().popBackStackImmediate();
         Intent intent = new Intent(this, BuildingChoiceActivity.class);
         intent.putExtra("user", user);
-        getSupportFragmentManager().popBackStackImmediate();
         startActivity(intent);
+        finish();
     }
 
     public void showToast(String message) {

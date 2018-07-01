@@ -14,6 +14,7 @@ import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.activity.BottomBarActivity;
 import be.technifutur.checkcleaning.entity.Building;
 import be.technifutur.checkcleaning.entity.Control;
+import be.technifutur.checkcleaning.entity.ControlDB;
 
 public class RootControlFragment extends Fragment {
 

@@ -13,12 +13,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import be.technifutur.checkcleaning.entity.Control;
+import be.technifutur.checkcleaning.entity.ControlDB;
 import be.technifutur.checkcleaning.listener.OnCreateControlFinishedListener;
 import be.technifutur.checkcleaning.listener.OnGetControlsFinishedListener;
 
@@ -33,50 +35,23 @@ public class ControlRepository {
         this.mDatabase = FirebaseFirestore.getInstance();
     }
 
-    public void getByBuildingId(final String buildingId, final List<String> categories, final OnGetControlsFinishedListener listener) {
+    public void getControlsByBuilding(String buildingId, final OnGetControlsFinishedListener listener){
 
-        final Map<String, List<Control>> controlMap = new HashMap<>();
+        final List<ControlDB> controls = new ArrayList<>();
 
-        for (int i = 0; i < categories.size(); i++){
+        CollectionReference colRef = mDatabase.collection("building_control").document(buildingId).collection("control");
+        colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
-            CollectionReference colRef = mDatabase.collection("building_control").document(buildingId).collection(categories.get(i));
-
-            final int finalI = i;
-            colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                    if (task.isSuccessful()){
-
-                        List<Control> controls = new ArrayList<>();
-
-                        for (DocumentSnapshot doc : task.getResult().getDocuments()){
-
-                            Control c = doc.toObject(Control.class);
-                            controls.add(c);
-                        }
-
-                        controlMap.put(categories.get(finalI), controls);
-
-                        if (controlMap.size() == 7){
-
-                            listener.onGetControlsSuccess(controlMap);
-                        }
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        ControlDB control = document.toObject(ControlDB.class);
+                        controls.add(control);
                     }
                 }
-            });
-        }
-    }
-
-    public void addControlToCategory(String buildingId, String category, Control mControl, final OnCreateControlFinishedListener listener) {
-
-        mDatabase.collection("building_control").document(buildingId).collection(category).add(mControl)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-
-                        listener.onCreateControlSuccess();
-                    }
-                });
+                listener.onGetControlsSuccess(controls);
+            }
+        });
     }
 }

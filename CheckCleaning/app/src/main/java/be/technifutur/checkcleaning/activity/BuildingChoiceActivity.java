@@ -89,6 +89,8 @@ public class BuildingChoiceActivity extends AppCompatActivity implements NumberP
                 selectedBuilding = mBuildings.get(0);
             }
         }
+
+        getSupportFragmentManager().popBackStackImmediate();
     }
 
     @Override

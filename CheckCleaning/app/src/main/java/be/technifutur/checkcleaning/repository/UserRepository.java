@@ -40,6 +40,11 @@ public class UserRepository{
         return mAuth.getUid() != null;
     }
 
+    public void signOut(){
+
+        mAuth.getInstance().signOut();
+    }
+
     public void signInByEmailAndPassword(String email, String password, final OnLoginFinishedListener listener, Activity view) {
 
         mAuth.signInWithEmailAndPassword(email, password)

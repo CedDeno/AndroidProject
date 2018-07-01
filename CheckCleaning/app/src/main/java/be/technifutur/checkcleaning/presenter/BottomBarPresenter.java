@@ -9,6 +9,7 @@ import java.util.Map;
 import be.technifutur.checkcleaning.activity.BottomBarActivity;
 import be.technifutur.checkcleaning.entity.Building;
 import be.technifutur.checkcleaning.entity.Control;
+import be.technifutur.checkcleaning.entity.ControlDB;
 import be.technifutur.checkcleaning.entity.User;
 import be.technifutur.checkcleaning.listener.OnGetControlsFinishedListener;
 import be.technifutur.checkcleaning.listener.OnGetTeamFinishedListener;
@@ -42,22 +43,18 @@ public class BottomBarPresenter implements OnGetTeamFinishedListener, OnGetContr
 
     public void loadControls() {
 
-        List<String> categories = new ArrayList<>();
-        categories.add("cafetaria");
-        categories.add("meeting_room");
-        categories.add("office");
-        categories.add("open_space");
-        categories.add("relaxation_area");
-        categories.add("restaurant");
-        categories.add("wc");
-        mControlRepo.getByBuildingId(mbuilding.getId(), categories, this);
+        mControlRepo.getControlsByBuilding(mbuilding.getId(), this);
     }
 
     @Override
-    public void onGetControlsSuccess(Map<String, List<Control>> controls) {
-
-        int i = controls.size();
+    public void onGetControlsSuccess(List<ControlDB> controls) {
 
         mView.setControls(controls);
+    }
+
+    public void disconnectUser(){
+
+        mUserRepo.signOut();
+        mView.returnToMainActivity();
     }
 }

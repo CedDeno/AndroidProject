@@ -45,10 +45,10 @@
     <string name="parkin_category_key">parking</string>
     <string name="shower_category_title">Douche</string>
     <string name="parking_category_title">Parking</string>
-    <string name="report_place_textView">Lieu</string>
+    <string name="report_place_textView">Salle</string>
     <string name="report_comment_textView">Commentaire</string>
     <string name="take_picture_button">Prendre une photo</string>
-    <string name="report_send_button">Envoyer</string>
+    <string name="report_generate_button">Générer PDF</string>
     <string name="report_place_hint">Nom salle, n°,...</string>
     <string name="report_comment_hint">Problème, remarque, ...</string>
 </resources>

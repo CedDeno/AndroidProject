@@ -16,11 +16,6 @@ public class CreateControlPresenter implements OnCreateControlFinishedListener {
         mRepo = new ControlRepository();
     }
 
-    public void createControl(String category, Control newControl){
-
-        mRepo.addControlToCategory(mBuildingId, category, newControl, this);
-    }
-
     @Override
     public void onCreateControlSuccess() {
 

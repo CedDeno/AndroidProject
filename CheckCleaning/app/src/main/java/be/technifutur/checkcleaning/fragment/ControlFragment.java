@@ -7,17 +7,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.Util.CustomProgress;
 import be.technifutur.checkcleaning.activity.BottomBarActivity;
 import be.technifutur.checkcleaning.entity.Building;
 import be.technifutur.checkcleaning.entity.Control;
+import be.technifutur.checkcleaning.entity.ControlDB;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -43,6 +41,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
     CustomProgress customProgressShower;
     @BindView(R.id.custom_progress_parking)
     CustomProgress customProgressParking;
+
 
     private BottomBarActivity mActivity;
     private Building mBuilding;
@@ -109,6 +108,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
 
             cp.setOnClickListener(null);
             cp.setProgressBackgroundColor(getResources().getColor(R.color.colorGrey));
+            cp.setText(name);
         }else{
             float floatNb = 0;
 
@@ -281,67 +281,85 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
 
     private void initControlNbMap() {
 
-        int finalCount = mBuilding.getStructure().getKitchenette() / 10;
-        if (finalCount == 0){
+        int roomCount = mBuilding.getStructure().getKitchenette();
+        if (roomCount == 0){
+            mControlNb.put("kitchenette", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("kitchenette", 1);
         }else{
-            mControlNb.put("kitchenette", finalCount);
+            mControlNb.put("kitchenette", roomCount / 10);
         }
 
-        finalCount = mBuilding.getStructure().getMeeting_room() / 10;
-        if (finalCount == 0){
+        roomCount = mBuilding.getStructure().getMeeting_room();
+        if (roomCount == 0){
+            mControlNb.put("meeting_room", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("meeting_room", 1);
         }else{
-            mControlNb.put("meeting_room", finalCount);
+            mControlNb.put("meeting_room", roomCount / 10);
         }
 
-        finalCount = mBuilding.getStructure().getOffice() / 10;
-        if (finalCount == 0){
+        roomCount = mBuilding.getStructure().getOffice();
+        if (roomCount == 0){
+            mControlNb.put("office", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("office", 1);
         }else{
-            mControlNb.put("office", finalCount);
+            mControlNb.put("office", roomCount / 10);
         }
 
-        finalCount = mBuilding.getStructure().getOpen_space() / 10;
-        if (finalCount == 0){
+        roomCount = mBuilding.getStructure().getOpen_space();
+        if (roomCount == 0){
+            mControlNb.put("open_space", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("open_space", 1);
         }else{
-            mControlNb.put("open_space", finalCount);
+            mControlNb.put("open_space", roomCount / 10);
         }
 
-        finalCount = mBuilding.getStructure().getParking() / 10;
-        if (finalCount == 0){
+        roomCount = mBuilding.getStructure().getParking();
+        if (roomCount == 0){
+            mControlNb.put("parking", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("parking", 1);
         }else{
-            mControlNb.put("parking", finalCount);
+            mControlNb.put("parking", roomCount / 10);
         }
 
-        finalCount = mBuilding.getStructure().getRelaxation_area() / 10;
-        if (finalCount == 0){
+        roomCount = mBuilding.getStructure().getRelaxation_area();
+        if (roomCount == 0){
+            mControlNb.put("relaxation_area", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("relaxation_area", 1);
         }else{
-            mControlNb.put("relaxation_area", finalCount);
+            mControlNb.put("relaxation_area", roomCount / 10);
         }
 
-        finalCount = mBuilding.getStructure().getRestaurant() / 10;
-        if (finalCount == 0){
+        roomCount = mBuilding.getStructure().getRestaurant();
+        if (roomCount == 0){
+            mControlNb.put("restaurant", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("restaurant", 1);
         }else{
-            mControlNb.put("restaurant", finalCount);
+            mControlNb.put("restaurant", roomCount / 10);
         }
 
-        finalCount = mBuilding.getStructure().getShower() / 10;
-        if (finalCount == 0){
+        roomCount = mBuilding.getStructure().getShower();
+        if (roomCount == 0){
+            mControlNb.put("shower", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("shower", 1);
         }else{
-            mControlNb.put("shower", finalCount);
+            mControlNb.put("shower", roomCount / 10);
         }
 
-        finalCount = mBuilding.getStructure().getWc() / 10;
-        if (finalCount == 0){
+        roomCount = mBuilding.getStructure().getWc();
+        if (roomCount == 0){
+            mControlNb.put("wc", 0);
+        }else if(roomCount < 10) {
             mControlNb.put("wc", 1);
         }else{
-            mControlNb.put("wc", finalCount);
+            mControlNb.put("wc", roomCount / 10);
         }
     }
 
@@ -349,4 +367,5 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
         mActivity.setFragmentIsOpen(false);
         mActivity.getViewPager().setEnable(true);
     }
+
 }

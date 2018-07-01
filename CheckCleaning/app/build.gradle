@@ -46,6 +46,8 @@ dependencies {
     implementation 'com.airbnb.android:lottie:2.5.5'
     implementation 'com.mindorks:paracamera:0.2.2'
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.0.9@aar'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

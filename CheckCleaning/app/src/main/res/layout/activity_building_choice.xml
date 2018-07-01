@@ -15,6 +15,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="20dp"
         android:animateLayoutChanges="true"
+        android:descendantFocusability="blocksDescendants"
         android:theme="@style/NumberPickerTheme"
         android:solidColor="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="@+id/btnCreateBuilding"
