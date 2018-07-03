@@ -78,9 +78,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
-        LineData lineData = new LineData(labels, lineDataSet);
-        lineData.setValueTextSize(11);
-        homeLineChart.setData(lineData);
+        if (mControlDBs.size() > 0){
+            LineData lineData = new LineData(labels, lineDataSet);
+            homeLineChart.setData(lineData);
+            lineData.setValueTextSize(11);
+        }
         homeLineChart.setDescription("");
         homeLineChart.setClickable(false);
         homeLineChart.setTouchEnabled(false);
@@ -88,6 +90,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         homeLineChart.setDrawBorders(false);
         homeLineChart.setBackgroundColor(Color.WHITE);
         homeLineChart.setHighlightLineWidth(5);
+        homeLineChart.setNoDataText("Aucune donnée disponible");
 
         XAxis xAxis = homeLineChart.getXAxis();
         xAxis.setDrawGridLines(false);
@@ -143,7 +146,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             entries.add(new Entry(ctrl.getRating(), i));
             labels.add(getMonth(ctrl.getDate().getMonth()));
         }
-
         lineDataSet = new LineDataSet(entries, "Qualité mensuelle du nettoyage du bâtiment en %");
         lineDataSet.setCircleSize(6);
         lineDataSet.setLineWidth(2);

@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:background="@color/primary"
         android:padding="6dp"
-        android:text="Note"
+        android:text="Tâche"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"

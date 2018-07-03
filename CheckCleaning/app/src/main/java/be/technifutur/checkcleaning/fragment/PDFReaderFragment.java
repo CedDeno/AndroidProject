@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -108,8 +106,6 @@ public class PDFReaderFragment extends Fragment {
 
         // Open page with specified index
         mCurrentPage = mPdfRenderer.openPage(index);
-        Toast.makeText(getContext(), mCurrentPage.getWidth() + " " + mCurrentPage.getHeight(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), pdfView.getWidth() + " " + pdfView.getHeight(), Toast.LENGTH_SHORT).show();
         Bitmap bitmap = Bitmap.createBitmap(mCurrentPage.getWidth(),
                 mCurrentPage.getHeight(), Bitmap.Config.ARGB_8888);
 
@@ -128,7 +124,6 @@ public class PDFReaderFragment extends Fragment {
         int pageCount = mPdfRenderer.getPageCount();
         previousButton.setEnabled(0 != index);
         nextButton.setEnabled(index + 1 < pageCount);
-        mActivity.setTitle(file.getName() + "(" + (index + 1) + "/" + pageCount + ")");
     }
 
     @Override

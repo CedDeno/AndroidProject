@@ -37,9 +37,6 @@ public class TodoPresenter implements OnGetTasksFinishedListener, OnUpdateTasksF
 
     public void removeTasks(Set<Integer> selections) {
 
-        Toast.makeText(mView.getContext(), "TASKS = " + mUser.getTasks().toString() + " SELECTIONS = " + selections.toString(), Toast.LENGTH_LONG).show();
-        System.out.println("TASKS = " + mUser.getTasks().toString() + " SELECTIONS = " + selections.toString());
-
         List<Integer> intList = new ArrayList<>();
         for (int i  : selections){
 

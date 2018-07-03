@@ -200,7 +200,6 @@ public class TodoFragment extends Fragment{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //handle the click on the back arrow click
-        Toast.makeText(this.getContext(), "item.getItemId()", Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
 
             case android.R.id.home:
@@ -235,7 +234,7 @@ public class TodoFragment extends Fragment{
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 
-            mUndoHelper.remove(getActivity().findViewById(android.R.id.content), "Item removed", "Undo", Snackbar.LENGTH_LONG, taskItemAdapter.getSelections());
+            mUndoHelper.remove(getActivity().findViewById(android.R.id.content), "Tâches supprimées", "Annuler", Snackbar.LENGTH_LONG, taskItemAdapter.getSelections());
             mode.finish();
             //we consume the event
             return true;

@@ -1,6 +1,5 @@
 package be.technifutur.checkcleaning.fragment;
 
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,7 +10,6 @@ import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -21,17 +19,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.mindorks.paracamera.Camera;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.activity.BottomBarActivity;
 import be.technifutur.checkcleaning.entity.Building;
@@ -39,9 +33,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static be.technifutur.checkcleaning.R.color.blackLightColor;
-import static be.technifutur.checkcleaning.R.color.buttonColor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -186,8 +177,6 @@ public class ReportFragment extends Fragment {
 
             // create a page description
             int pageNumber = 2;
-            System.out.println("View Height = " + view.getHeight());
-            System.out.println("View Width = " + view.getWidth());
 
             PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(view.getWidth() - 16,
                     view.getHeight() - 36, pageNumber).create();
@@ -195,52 +184,61 @@ public class ReportFragment extends Fragment {
             // create a new page from the PageInfo
             PdfDocument.Page page = document.startPage(pageInfo);
             Canvas canvas = page.getCanvas();
-            System.out.println("Canvas Height = " + canvas.getHeight());
-            System.out.println("Canvas Width = " + canvas.getWidth());
             Paint paint = new Paint();
             paint.setStyle(Paint.Style.FILL);
             paint.setAntiAlias(true);
             paint.setARGB(255, 255, 255, 255);
 
-            //Title of Report
-            paint.setTextSize(60);
-            paint.setColor(getResources().getColor(R.color.md_black_1000));
-            canvas.drawText("Rapport du " + sdf.format(Calendar.getInstance().getTime()),
-                    100, 140, paint);
-
             //Logo of app
             Bitmap bitmapLogo = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-            canvas.drawBitmap(bitmapLogo, canvas.getWidth() - 180, 50, paint);
+            canvas.drawBitmap(bitmapLogo, canvas.getWidth() - 230, 50, paint);
+
+            //Name of application
+            paint.setTextSize(55);
+            paint.setColor(getResources().getColor(R.color.buttonColor));
+            canvas.drawText("CheckClean",
+                    canvas.getWidth() - 320, 260, paint);
+
+            //Date of Report
+            paint.setTextSize(30);
+            paint.setColor(getResources().getColor(R.color.md_black_1000));
+            canvas.drawText(sdf.format(Calendar.getInstance().getTime()),
+                    canvas.getWidth() - 240, 300, paint);
+
+            //Building's name of Report
+            paint.setTextSize(50);
+            paint.setColor(getResources().getColor(R.color.primary));
+            canvas.drawText(mBuilding.getName(),60, 320, paint);
 
             //Room title
-            paint.setTextSize(50);
-            paint.setColor(getResources().getColor(R.color.buttonColor));
-            canvas.drawText(roomTitle, 60, 300, paint);
+            paint.setTextSize(40);
+            paint.setColor(getResources().getColor(R.color.md_black_1000));
+            canvas.drawText(roomTitle, 60, 420, paint);
 
             //Room desc
-            paint.setTextSize(40);
+            paint.setTextSize(30);
             paint.setColor(getResources().getColor(R.color.md_black_1000));
-            canvas.drawText(roomDesc, 120, 420, paint);
+            canvas.drawText(roomDesc, 120, 510, paint);
 
             //Comment title
-            paint.setTextSize(50);
-            paint.setColor(getResources().getColor(R.color.buttonColor));
-            canvas.drawText(commentTitle, 60, 600, paint);
-
-            //Comment desc
             paint.setTextSize(40);
             paint.setColor(getResources().getColor(R.color.md_black_1000));
-            canvas.drawText(commentDesc, 120, 720, paint);
+            canvas.drawText(commentTitle, 60, 690, paint);
+
+            //Comment desc
+            paint.setTextSize(30);
+            paint.setColor(getResources().getColor(R.color.md_black_1000));
+            canvas.drawText(commentDesc, 120, 810, paint);
 
             //Picture title
-            paint.setTextSize(50);
-            paint.setColor(getResources().getColor(R.color.buttonColor));
-            canvas.drawText("Photo", 60, 1120, paint);
+            paint.setTextSize(40);
+            paint.setColor(getResources().getColor(R.color.md_black_1000));
+            canvas.drawText("Photo", 60, 1210, paint);
 
             //Picture image
             reportPictureImageView.buildDrawingCache();
             Bitmap bitmapPicture = reportPictureImageView.getDrawingCache();
-            canvas.drawBitmap(bitmapPicture, 120, 1240, paint);
+            canvas.drawBitmap(bitmapPicture, 120, 1330, paint);
 
             // do final processing of the page
             document.finishPage(page);
@@ -268,7 +266,6 @@ public class ReportFragment extends Fragment {
 
                 loadPDFFragment();
             } else {
-                Toast.makeText(getContext(), "C'est la merde dans ReportFragment/PdfGenerationTask", Toast.LENGTH_SHORT).show();
             }
         }
 
