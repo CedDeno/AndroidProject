@@ -1,16 +1,22 @@
 package be.technifutur.checkcleaning.activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+
 import be.technifutur.checkcleaning.R;
 import be.technifutur.checkcleaning.entity.Building;
 import be.technifutur.checkcleaning.entity.User;
+import be.technifutur.checkcleaning.fragment.LoadingAnimationFragment;
 import be.technifutur.checkcleaning.presenter.BuildingChoicePresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +26,8 @@ public class BuildingChoiceActivity extends AppCompatActivity implements NumberP
 
     @BindView(R.id.picker_building)
     NumberPicker pickerBuilding;
+    @BindView(R.id.building_choice_app_name)
+    TextView buildingChoiceAppName;
 
     private BuildingChoicePresenter mPresenter;
     private User mUser;
@@ -37,6 +45,8 @@ public class BuildingChoiceActivity extends AppCompatActivity implements NumberP
 
         setTitle("Selection d'un chantier");
 
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/" + "Bright-script-clean.ttf");
+        buildingChoiceAppName.setTypeface(typeface);
         mUser = getIntent().getExtras().getParcelable("user");
         isNewBuilding = getIntent().getBooleanExtra("isNewBuilding", false);
         mPresenter = new BuildingChoicePresenter(this);
@@ -81,11 +91,11 @@ public class BuildingChoiceActivity extends AppCompatActivity implements NumberP
             pickerBuilding.setWrapSelectorWheel(true);
             pickerBuilding.setDisplayedValues(myArray);
 
-            if (isNewBuilding){
+            if (isNewBuilding) {
                 selectedBuilding = mBuildings.get(size - 1);
                 pickerBuilding.setValue(size - 1);
                 isNewBuilding = false;
-            }else{
+            } else {
                 selectedBuilding = mBuildings.get(0);
             }
         }
@@ -117,5 +127,15 @@ public class BuildingChoiceActivity extends AppCompatActivity implements NumberP
                 wouldLikeDC = false;
             }
         }, 2000);
+    }
+
+    public void startAnimationFragment() {
+        Fragment fragment = new LoadingAnimationFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.fade_in_bottom, android.R.animator.fade_out);
+        ft.replace(R.id.building_choice_activity, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }

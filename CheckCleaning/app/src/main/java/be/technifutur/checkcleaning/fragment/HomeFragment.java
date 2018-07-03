@@ -1,5 +1,6 @@
 package be.technifutur.checkcleaning.fragment;
 
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -10,11 +11,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ValueFormatter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import be.technifutur.checkcleaning.R;
@@ -37,7 +43,7 @@ import butterknife.Unbinder;
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     @BindView(R.id.home_barChart)
-    BarChart homeBarChart;
+    LineChart homeLineChart;
     Unbinder unbinder;
     @BindView(R.id.home_building_address)
     TextView homeBuildingAddress;
@@ -46,6 +52,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private LatLng mBuildingPosition;
     private BarDataSet dataSet;
     private List<String> labels;
+    private LineDataSet lineDataSet;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,7 +68,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        createDatasetAndLabels();
+        createLineDataset();
     }
 
     @Override
@@ -71,30 +78,29 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
-        BarData data = new BarData(labels, dataSet);
-        data.setValueTextSize(10);
+        LineData lineData = new LineData(labels, lineDataSet);
+        lineData.setValueTextSize(11);
+        homeLineChart.setData(lineData);
+        homeLineChart.setDescription("");
+        homeLineChart.setClickable(false);
+        homeLineChart.setTouchEnabled(false);
+        homeLineChart.setDrawGridBackground(false);
+        homeLineChart.setDrawBorders(false);
+        homeLineChart.setBackgroundColor(Color.WHITE);
+        homeLineChart.setHighlightLineWidth(5);
 
-        homeBarChart.setData(data);
-        homeBarChart.setDescription("");
-        homeBarChart.setClickable(false);
-        homeBarChart.getAxisLeft().setTextSize(12);
-        homeBarChart.getXAxis().setTextSize(15);
-        homeBarChart.setTouchEnabled(false);
-
-        XAxis xAxis = homeBarChart.getXAxis();
+        XAxis xAxis = homeLineChart.getXAxis();
         xAxis.setDrawGridLines(false);
+        xAxis.setTextColor(getResources().getColor(R.color.blackLightColor));
+        xAxis.setTextSize(12);
 
-        YAxis yAxisRight = homeBarChart.getAxisRight();
-        yAxisRight.setDrawLabels(false);
+        YAxis yAxisRight = homeLineChart.getAxisRight();
+        yAxisRight.setValueFormatter(new MyFormatter());
+        yAxisRight.setTextColor(getResources().getColor(R.color.blackLightColor));
 
-        YAxis yAxisLeft = homeBarChart.getAxisLeft();
-        yAxisLeft.setLabelCount(5);
+        YAxis yAxisLeft = homeLineChart.getAxisLeft();
         yAxisLeft.setValueFormatter(new MyFormatter());
-        yAxisLeft.setAxisMaxValue(100);
-        yAxisLeft.setDrawGridLines(false);
-
-        dataSet.setColor(getResources().getColor(R.color.buttonColorLight));
-        dataSet.setValueFormatter(new MyFormatter());
+        yAxisLeft.setTextColor(getResources().getColor(R.color.blackLightColor));
 
         SupportMapFragment mapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.home_map);
 
@@ -127,18 +133,28 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         map.getUiSettings().setScrollGesturesEnabled(false);
     }
 
-    public void createDatasetAndLabels() {
+    public void createLineDataset(){
 
-        ArrayList<BarEntry> entries = new ArrayList<>();
+        LineChart lineChart = new LineChart(getContext());
+        ArrayList<Entry> entries = new ArrayList<>();
         labels = new ArrayList();
-
         for (int i = 0; i < mControlDBs.size(); i++) {
             ControlDB ctrl = mControlDBs.get(i);
-            entries.add(new BarEntry((float) ctrl.getRating(), i));
+            entries.add(new Entry(ctrl.getRating(), i));
             labels.add(getMonth(ctrl.getDate().getMonth()));
         }
 
-        dataSet = new BarDataSet(entries, "Qualité mensuelle du nettoyage du bâtiment en %");
+        lineDataSet = new LineDataSet(entries, "Qualité mensuelle du nettoyage du bâtiment en %");
+        lineDataSet.setCircleSize(6);
+        lineDataSet.setLineWidth(2);
+        lineDataSet.setDrawCubic(true);
+        lineDataSet.setDrawFilled(true);
+        lineDataSet.setCircleColor(getResources().getColor(R.color.colorAccent));
+        lineDataSet.setColor(getResources().getColor(R.color.colorAccent));
+        lineDataSet.setFillColor(getResources().getColor(R.color.colorAccentLight));
+        lineDataSet.setValueFormatter(new MyFormatter());
+        lineDataSet.setValueTextColor(getResources().getColor(R.color.blackLightColor));
+        lineDataSet.setDrawValues(false);
     }
 
     public String getMonth(int i) {

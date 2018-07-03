@@ -3,13 +3,14 @@
     <color name="colorPrimary">#1d566e</color>
     <color name="colorPrimaryDark">#163a5f</color>
     <color name="colorAccent">#45eba5</color>
+    <color name="colorAccentLight">#b0ead2</color>
     <color name="colorGreyLight">#e4ece9</color>
     <color name="buttonColor">#21aba5</color>
     <color name="buttonColorLight">#a1cfca</color>
     <color name="selectedItemColor">#cfcfcf</color>
     <color name="colorGrey">#d9d9d9</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorWhiteLight">#c0ffffff</color>
+    <color name="colorWhiteLight">#e9ffffff</color>
     <color name="spinnerColor">#c0d4f7</color>
     <color name="redErrorColor">#ca5258</color>
     <color name="greenOkColor">#41a241</color>

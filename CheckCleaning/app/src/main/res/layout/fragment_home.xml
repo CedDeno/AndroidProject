@@ -18,39 +18,30 @@
             android:id="@+id/home_graph_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@color/primary"
             android:padding="9dp"
             android:text="Graphique de qualité"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/home_barChart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_graph_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/home_building_address" />
 
         <TextView
             android:id="@+id/home_localization_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:background="@color/primary"
             android:padding="9dp"
             android:text="Localisation"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_barChart" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/home_map"
@@ -66,14 +57,26 @@
             android:id="@+id/home_building_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LOCATION"
-            android:padding="15dp"
-            android:textAlignment="center"
             android:maxLines="2"
-            app:layout_constraintTop_toBottomOf="@id/home_map"
-            app:layout_constraintStart_toStartOf="parent"
+            android:padding="15dp"
+            android:text="LOCATION"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_map" />
+
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/home_barChart"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_graph_textView"/>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

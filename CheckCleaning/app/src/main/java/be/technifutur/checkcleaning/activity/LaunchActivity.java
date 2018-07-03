@@ -28,6 +28,7 @@ public class LaunchActivity extends AppCompatActivity implements Animator.Animat
 
         launchAnimationView.setAnimation("checkclean.json");
         launchAnimationView.playAnimation();
+        launchAnimationView.setSpeed(2);
         launchAnimationView.addAnimatorListener(this);
         unbinder = ButterKnife.bind(this);
     }

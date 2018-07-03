@@ -22,6 +22,7 @@ public class BuildingChoicePresenter implements OnGetBuildingsListener{
 
     public void loadBuildingsByUser(List<String> buildings_id) {
 
+        mView.startAnimationFragment();
         mRepo.getByUserId(buildings_id, this);
     }
 

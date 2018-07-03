@@ -45,7 +45,7 @@ public class LoginPresenter implements OnLoginFinishedListener, OnGetUserFinishe
     @Override
     public void onPasswordError() {
 
-        mView.showToast("Mot de passe invalide.");
+        mView.showToast("Email ou Mot de passe invalide.");
         mView.setHintOfEditTextToRed(false);
     }
 

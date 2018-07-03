@@ -1,8 +1,10 @@
 package be.technifutur.checkcleaning.entity;
 
+import android.support.annotation.NonNull;
+
 import java.util.Date;
 
-public class ControlDB {
+public class ControlDB implements Comparable<ControlDB> {
 
     private int rating;
     private Date date;
@@ -29,5 +31,16 @@ public class ControlDB {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+
+    @Override
+    public int compareTo(@NonNull ControlDB o) {
+
+        if (date.getMonth() < o.getDate().getMonth()){
+            return -1;
+        }else{
+            return 0;
+        }
     }
 }
